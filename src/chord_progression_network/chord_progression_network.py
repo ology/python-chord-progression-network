@@ -38,7 +38,6 @@ class Generator:
         self.sub_cond = sub_cond if sub_cond is not None else lambda: random.randint(0, 3) == 0
         self.flat = flat
         self.verbose = verbose
-
         self.chord_map = chord_map if chord_map is not None else self._build_chord_map()
         self.scale = self._build_scale()
         self.graph = self._build_graph()
@@ -69,7 +68,7 @@ class Generator:
         return s
 
     def _equiv(self, note):
-        match = re.search(r"^([A-G][#b]?)(\d)$", note)
+        match = re.search(r"^([A-G][#b]+?)(\d)$", note)
         n = match.group(1)
         octave = match.group(2)
         equiv = {
