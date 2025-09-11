@@ -81,13 +81,13 @@ class TestChordProgression(unittest.TestCase):
         p = g.generate()
         self.assertEqual(p, expect)
 
-    # def test_chord_map(self):
-    #     obj = Generator(chord_map=[''])
-    #     with self.assertRaises(ValueError):
-    #         obj.generate()
+    def test_chord_map(self):
+        g = Generator(chord_map=[''])
+        with self.assertRaises(ValueError):
+            g.generate()
 
-    #     obj = Generator(scale_name='chromatic')
-    #     self.assertEqual(obj.chord_map, ['m'] * 12)
+        g = Generator(scale_name='chromatic')
+        self.assertEqual(g.chord_map, ['m'] * 12)
 
 if __name__ == '__main__':
     unittest.main()
