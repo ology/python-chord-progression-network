@@ -142,7 +142,7 @@ class Generator:
         v = v if v is not None else 1
         s = None
         if n == 1:
-            if not self.tonic == 0:
+            if self.tonic == 0:
                 s = self._random_successor(1)
             elif self.tonic == 1:
                 s = 1
