@@ -50,22 +50,22 @@ class TestChordProgression(unittest.TestCase):
         self.assertEqual(p[-1], expect)
 
     def test_substitution(self):
-        g = Generator(scale_note='Bb', flat=True)
+        g = Generator(scale_note='Bb')
         p = g.substitution('')
         self.assertTrue(p == '7' or p == 'M7')
         p = g.substitution('m')
         self.assertTrue(p == 'm7' or p == 'mM7')
         p = g.substitution('7')
         self.assertTrue(p == '9' or p == '11' or p == '13')
-
-    #     obj = Generator(
-    #         max=3,
-    #         substitute=True,
-    #         sub_cond=lambda: True
-    #     )
-    #     got = obj.generate()
-    #     for chord in got:
-    #         self.assertTrue(len(chord) > 3)
+        # always substitute
+        g = Generator(
+            max=3,
+            substitute=True,
+            sub_cond=lambda: True
+        )
+        p = g.generate()
+        for chord in p:
+            self.assertTrue(len(chord) > 3)
 
     # def test_net(self):
     #     obj = Generator(
