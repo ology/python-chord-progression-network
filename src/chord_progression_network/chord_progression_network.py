@@ -2,6 +2,7 @@ import random
 import re
 import networkx as nx
 import musical_scales
+from pychord import Chord
 
 class Generator:
     def __init__(
@@ -176,9 +177,8 @@ class Generator:
         return note
 
     def _chord_with_octave(self, chord, octave):
-        # Placeholder: returns chord as a list with octave appended
-        # Replace with actual chord note generation logic as needed
-        return [f"{chord}{octave}"]
+        c = Chord(chord)
+        return c.components_with_pitch(root_pitch=self.octave)
 
     def substitution(self, chord):
         substitute = chord
