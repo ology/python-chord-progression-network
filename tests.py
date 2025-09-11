@@ -24,9 +24,9 @@ class TestChordProgression(unittest.TestCase):
 
     def test_scale_note(self):
         g = Generator(scale_note='Bb', verbose=True)
-    #     expect = ['A#4', 'D5', 'F5']
+        expect = ['A#4', 'D5', 'F5']
         p = g.generate()
-    #     self.assertEqual(p[0], expect)
+        self.assertEqual(p[0], expect)
     #     self.assertEqual(p[-1], expect)
     #     obj = Generator(
     #         scale_note='A',

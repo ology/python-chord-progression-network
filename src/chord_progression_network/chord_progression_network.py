@@ -111,6 +111,7 @@ class Generator:
             v = self._next_successor(n, v)
             progression.append(v)
         if self.verbose:
+            print('Scale:', self.scale)
             print('Progression:', progression)
 
         chord_map = self.chord_map
