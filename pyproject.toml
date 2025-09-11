@@ -41,7 +41,7 @@ classifiers = [
 requires-python = ">= 3.9"
 
 # List your needed third-party libraries, if you have any.
-dependencies = ["music21"]
+dependencies = ["networkx", "musical_scales", "pychord"]
 
 # State that the version will be defined dynamically below.
 dynamic = ["version"]
