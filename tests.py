@@ -13,7 +13,7 @@ class TestChordProgression(unittest.TestCase):
         self.assertEqual(g.scale_note, 'C')
         self.assertEqual(len(g.scale), 8)
         self.assertEqual(g.octave, 4)
-        self.assertEqual(g.tonic, True)
+        self.assertEqual(g.tonic, 1)
         self.assertEqual(g.resolve, True)
         self.assertEqual(g.substitute, False)
         self.assertEqual(g.flat, False)

@@ -12,7 +12,7 @@ class Generator:
         scale_name='major',
         scale_note='C',
         octave=4,
-        tonic=True,
+        tonic=1,
         resolve=True,
         substitute=False,
         sub_cond=None,
@@ -135,7 +135,7 @@ class Generator:
         v = v if v is not None else 1
         s = None
         if n == 1:
-            if self.tonic == 0:
+            if not self.tonic == 0:
                 s = self._random_successor(1)
             elif self.tonic == 1:
                 s = 1
