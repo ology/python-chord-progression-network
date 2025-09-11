@@ -69,6 +69,8 @@ class Generator:
         if self.flat:
             flattened = [ self._equiv(note) for note in s2 ]
             s2 = flattened
+        if self.verbose:
+            print('Scale:', s2)
         return s2
 
     def _equiv(self, note):
@@ -111,7 +113,6 @@ class Generator:
             v = self._next_successor(n, v)
             progression.append(v)
         if self.verbose:
-            print('Scale:', self.scale)
             print('Progression:', progression)
 
         chord_map = self.chord_map
