@@ -23,36 +23,40 @@ class TestChordProgression(unittest.TestCase):
         self.assertEqual(len(g.graph.edges), 24)
 
     def test_scale_note(self):
-        g = Generator(scale_note='Bb', verbose=True)
+        g = Generator(
+            scale_note='Bb',
+            # verbose=True
+        )
         expect = ['A#4', 'D5', 'F5']
         p = g.generate()
         self.assertEqual(p[0], expect)
         self.assertEqual(p[-1], expect)
-    #     obj = Generator(
-    #         scale_note='A',
-    #         scale_name='minor',
-    #         chord_map=['m', 'dim', '', 'm', 'm', '', '']
-    #     )
-    #     expect = ['A4', 'C5', 'E5']
-    #     got = obj.generate()
-    #     self.assertEqual(got[0], expect)
-    #     self.assertEqual(got[-1], expect)
+        g = Generator(
+            scale_note='A',
+            scale_name='minor',
+            chord_map=['m', 'dim', '', 'm', 'm', '', ''],
+            # verbose=True
+        )
+        expect = ['A4', 'C5', 'E5']
+        p = g.generate()
+        self.assertEqual(p[0], expect)
+        self.assertEqual(p[-1], expect)
 
-    # def test_flattening(self):
-    #     obj = Generator(scale_note='Bb', flat=True)
-    #     expect = ['Bb4', 'D5', 'F5']
-    #     got = obj.generate()
-    #     self.assertEqual(got[0], expect)
-    #     self.assertEqual(got[-1], expect)
+    def test_flattening(self):
+        g = Generator(scale_note='Bb', flat=True)
+        expect = ['Bb4', 'D5', 'F5']
+        p = g.generate()
+        self.assertEqual(p[0], expect)
+        self.assertEqual(p[-1], expect)
 
-    # def test_substitution(self):
-    #     obj = Generator(scale_note='Bb', flat=True)
-    #     got = obj.substitution('')
-    #     self.assertTrue(got == 7 or got == 'M7')
-    #     got = obj.substitution('m')
-    #     self.assertTrue(got == 'm7' or got == 'mM7')
-    #     got = obj.substitution(7)
-    #     self.assertTrue(got == 9 or got == 11 or got == 13)
+    def test_substitution(self):
+        g = Generator(scale_note='Bb', flat=True)
+        p = g.substitution('')
+        self.assertTrue(p == '7' or p == 'M7')
+        p = g.substitution('m')
+        self.assertTrue(p == 'm7' or p == 'mM7')
+        p = g.substitution('7')
+        self.assertTrue(p == '9' or p == '11' or p == '13')
 
     #     obj = Generator(
     #         max=3,

@@ -74,9 +74,6 @@ class Generator:
         return s2
 
     def _equiv(self, note):
-        match = re.search(r"^([A-G][#b]+?)(\d)$", note)
-        n = match.group(1)
-        octave = match.group(2)
         equiv = {
             'C#':  'Db',
             'D#':  'Eb',
@@ -93,7 +90,13 @@ class Generator:
             'Abb': 'G',
             'Bbb': 'A',
         }
-        return equiv.get(note) + octave if note in equiv else note + octave
+        match = re.search(r"^([A-G][#b]+?)(\d)$", note)
+        if match:
+            note = match.group(1)
+            octave = match.group(2)
+            return equiv.get(note) + octave if note in equiv else note + octave
+        else:
+            return note
 
     def _build_graph(self):
         g = nx.DiGraph()
