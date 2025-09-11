@@ -13,7 +13,7 @@ class Generator:
         scale_note='C',
         octave=4,
         tonic=1,
-        resolve=True,
+        resolve=1,
         substitute=False,
         sub_cond=None,
         flat=False,
