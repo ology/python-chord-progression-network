@@ -114,14 +114,14 @@ class Generator:
             print('Progression:', progression)
 
         chord_map = self.chord_map
-        # if self.substitute:
-        #     for i, chord in enumerate(chord_map):
-        #         substitute = self.substitution(chord) if self.sub_cond() else chord
-        #         if substitute == chord and i < len(progression) and self.sub_cond():
-        #             progression[i] = str(progression[i]) + 't'
-        #         chord_map[i] = substitute
-        #     if self.verbose:
-        #         print('Chord map:', chord_map)
+        if self.substitute:
+            for i, chord in enumerate(chord_map):
+                substitute = self.substitution(chord) if self.sub_cond() else chord
+                if substitute == chord and i < len(progression) and self.sub_cond():
+                    progression[i] = str(progression[i]) + 't'
+                chord_map[i] = substitute
+            if self.verbose:
+                print('Chord map:', chord_map)
 
         phrase = [self._tt_sub(chord_map, n) for n in progression]
         self.phrase = phrase
