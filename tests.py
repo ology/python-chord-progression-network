@@ -22,11 +22,10 @@ class TestChordProgression(unittest.TestCase):
         self.assertEqual(len(g.graph.nodes), 6)
         self.assertEqual(len(g.graph.edges), 24)
 
-    # def test_scale_note(self):
-    #     g = Generator(scale_note='Bb')
+    def test_scale_note(self):
+        g = Generator(scale_note='Bb', verbose=True)
     #     expect = ['A#4', 'D5', 'F5']
-    #     p = g.generate()
-    #     print(p)
+        p = g.generate()
     #     self.assertEqual(p[0], expect)
     #     self.assertEqual(p[-1], expect)
     #     obj = Generator(

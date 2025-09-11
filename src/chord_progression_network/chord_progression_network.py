@@ -61,12 +61,15 @@ class Generator:
         return scale_maps.get(self.scale_name)
 
     def _build_scale(self):
-        # XXX this uses the patched musical_scales package
-        s = musical_scales.scale(self.scale_note, starting_octave=5)
+        s = musical_scales.scale(self.scale_note)
+        # remove the octave number from the strinified Note
+        s2 = []
+        for n in s:
+            s2.append(re.sub(r"\d+", "", f"{n}"))
         if self.flat:
-            flattened = [ self._equiv(note) for note in s ]
-            s = flattened
-        return s
+            flattened = [ self._equiv(note) for note in s2 ]
+            s2 = flattened
+        return s2
 
     def _equiv(self, note):
         match = re.search(r"^([A-G][#b]+?)(\d)$", note)
@@ -101,6 +104,7 @@ class Generator:
         if len(self.chord_map) != len(self.net):
             raise ValueError('chord_map length must equal number of net keys')
 
+        # build progression of successors of v
         progression = []
         v = None
         for n in range(1, self.max + 1):
@@ -109,22 +113,22 @@ class Generator:
         if self.verbose:
             print('Progression:', progression)
 
-        chord_map = list(self.chord_map)
-        if self.substitute:
-            for i, chord in enumerate(chord_map):
-                substitute = self.substitution(chord) if self.sub_cond() else chord
-                if substitute == chord and i < len(progression) and self.sub_cond():
-                    progression[i] = str(progression[i]) + 't'
-                chord_map[i] = substitute
-            if self.verbose:
-                print('Chord map:', chord_map)
+        chord_map = self.chord_map
+        # if self.substitute:
+        #     for i, chord in enumerate(chord_map):
+        #         substitute = self.substitution(chord) if self.sub_cond() else chord
+        #         if substitute == chord and i < len(progression) and self.sub_cond():
+        #             progression[i] = str(progression[i]) + 't'
+        #         chord_map[i] = substitute
+        #     if self.verbose:
+        #         print('Chord map:', chord_map)
 
         phrase = [self._tt_sub(chord_map, n) for n in progression]
         self.phrase = phrase
         if self.verbose:
             print('Phrase:', self.phrase)
 
-        chords = [self._chord_with_octave(chord, self.octave) for chord in phrase]
+        chords = [self._chord_with_octave(chord) for chord in phrase]
         if self.flat:
             chords = [[self._equiv(note) for note in chord] for chord in chords]
         self.chords = chords
@@ -173,10 +177,10 @@ class Generator:
                 print(f'Tritone: {self.scale[n - 1]} => {note}')
         else:
             note = self.scale[int(n) - 1]
-        note += chord_map[int(n) - 1]
+        note = f"{note}" + chord_map[int(n) - 1]
         return note
 
-    def _chord_with_octave(self, chord, octave):
+    def _chord_with_octave(self, chord):
         c = Chord(chord)
         return c.components_with_pitch(root_pitch=self.octave)
 
