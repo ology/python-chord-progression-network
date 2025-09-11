@@ -67,19 +67,19 @@ class TestChordProgression(unittest.TestCase):
         for chord in p:
             self.assertTrue(len(chord) > 3)
 
-    # def test_net(self):
-    #     obj = Generator(
-    #         max=7,
-    #         net={1: [2], 2: [3], 3: [4], 4: [5], 5: [6], 6: [7], 7: [1]},
-    #         resolve=False
-    #     )
-    #     expect = [
-    #         ['C4', 'E4', 'G4'], ['D4', 'F4', 'A4'], ['E4', 'G4', 'B4'],
-    #         ['F4', 'A4', 'C5'], ['G4', 'B4', 'D5'], ['A4', 'C5', 'E5'],
-    #         ['B4', 'D5', 'F5'],
-    #     ]
-    #     got = obj.generate()
-    #     self.assertEqual(got, expect)
+    def test_net(self):
+        g = Generator(
+            max=7,
+            net={ 1: [2], 2: [3], 3: [4], 4: [5], 5: [6], 6: [7], 7: [1] },
+            resolve=False
+        )
+        expect = [
+            ['C4', 'E4', 'G4'], ['D4', 'F4', 'A4'], ['E4', 'G4', 'B4'],
+            ['F4', 'A4', 'C5'], ['G4', 'B4', 'D5'], ['A4', 'C5', 'E5'],
+            ['B4', 'D5', 'F5'],
+        ]
+        p = g.generate()
+        self.assertEqual(p, expect)
 
     # def test_chord_map(self):
     #     obj = Generator(chord_map=[''])
