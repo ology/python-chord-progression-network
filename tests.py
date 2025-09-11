@@ -85,7 +85,6 @@ class TestChordProgression(unittest.TestCase):
         g = Generator(chord_map=[''])
         with self.assertRaises(ValueError):
             g.generate()
-
         g = Generator(scale_name='chromatic')
         self.assertEqual(g.chord_map, ['m'] * 12)
 
