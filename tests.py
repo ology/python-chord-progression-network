@@ -115,6 +115,7 @@ class TestChordProgression(unittest.TestCase):
 
     def test_scale(self):
         g = Generator(
+            max=3,
             scale=['C','E','G','B'],
             net={
                 1: [2],
@@ -126,7 +127,7 @@ class TestChordProgression(unittest.TestCase):
         )
         self.assertEqual(g.scale, ['C','E','G','B'])
         p = g.generate()
-        self.assertEqual(len(p), 8)
+        self.assertEqual(p[1], ['E4', 'G4', 'B4'])
 
 if __name__ == '__main__':
     unittest.main()
