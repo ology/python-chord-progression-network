@@ -21,7 +21,7 @@ For the `major` scale (`ionian` mode), this `chord_map` is `['', 'm', 'm', '', '
 
 The `tonic` attribute means that if the first chord of the progression is being generated, then for `0` choose a random successor of the first chord, as defined by the `net` attribute. For `1`, return the first chord in the scale. For any other value, choose a random value of the entire scale.
 
-The `resolve` attribute means that if the last progression chord is being generated, then for `0` choose a random successor. As for the `tonic`, for `1`, return the first chord in the scale, and for any other value, choose a random value of the entire scale.
+The `resolve` attribute means that if the last progression chord is being generated, then for `0` choose a random successor. As for the `tonic`, for `1`, return the first chord in the scale, and for any other value, choose a random value of the entire scale. In all other cases (i.e. the middle chords of the progression), choose a random successor.
 
 ## SYNOPSIS
 ```python
