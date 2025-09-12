@@ -64,6 +64,7 @@ class TestChordProgression(unittest.TestCase):
             sub_cond=lambda: True
         )
         p = g.generate()
+        # each chord is extended
         for chord in p:
             self.assertTrue(len(chord) > 3)
 
