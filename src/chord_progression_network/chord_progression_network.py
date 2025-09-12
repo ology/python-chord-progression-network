@@ -18,6 +18,7 @@ class Generator:
         substitute=False,
         sub_cond=None,
         flat=False,
+        chord_phrase=False,
         verbose=False,
     ):
         self.max = max
@@ -38,6 +39,7 @@ class Generator:
         self.substitute = substitute
         self.sub_cond = sub_cond if sub_cond is not None else lambda: random.randint(0, 3) == 0
         self.flat = flat
+        self.chord_phrase = chord_phrase
         self.verbose = verbose
         self.chord_map = chord_map if chord_map is not None else self._build_chord_map()
         self.scale = self._build_scale()
@@ -73,7 +75,7 @@ class Generator:
             print('Scale:', s2)
         return s2
 
-    def _equiv(self, note):
+    def _equiv(self, note, is_chord=False):
         equiv = {
             'C#':  'Db',
             'D#':  'Eb',
@@ -90,13 +92,22 @@ class Generator:
             'Abb': 'G',
             'Bbb': 'A',
         }
-        match = re.search(r"^([A-G][#b]+?)(\d)$", note)
-        if match:
-            note = match.group(1)
-            octave = match.group(2)
-            return equiv.get(note) + octave if note in equiv else note + octave
+        if is_chord:
+            match = re.search(r"^([A-G][#b]+?)(.*)$", note)
+            if match:
+                note = match.group(1)
+                flavor = match.group(2)
+                return equiv.get(note) + flavor if note in equiv else note + flavor
+            else:
+                return note
         else:
-            return note
+            match = re.search(r"^([A-G][#b]+?)(\d)$", note)
+            if match:
+                note = match.group(1)
+                octave = match.group(2)
+                return equiv.get(note) + octave if note in equiv else note + octave
+            else:
+                return note
 
     def _build_graph(self):
         g = nx.DiGraph()
@@ -133,13 +144,16 @@ class Generator:
         if self.verbose:
             print('Phrase:', self.phrase)
 
-        chords = [self._chord_with_octave(chord) for chord in phrase]
-        if self.flat:
-            chords = [[self._equiv(note) for note in chord] for chord in chords]
-        self.chords = chords
-        if self.verbose:
-            print('Chords:', self.chords)
-        return chords
+        if self.chord_phrase:
+            return phrase
+        else:
+            chords = [self._chord_with_octave(chord) for chord in phrase]
+            if self.flat:
+                chords = [[self._equiv(note) for note in chord] for chord in chords]
+            self.chords = chords
+            if self.verbose:
+                print('Chords:', self.chords)
+            return chords
 
     def _next_successor(self, n, v):
         v = v if v is not None else 1

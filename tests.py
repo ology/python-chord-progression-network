@@ -89,5 +89,14 @@ class TestChordProgression(unittest.TestCase):
         g = Generator(scale_name='chromatic')
         self.assertEqual(g.chord_map, ['m'] * 12)
 
+    def test_chord_phrase(self):
+        g = Generator(
+            scale_note='Bb',
+            chord_phrase=True,
+            # verbose=True
+        )
+        p = g.generate()
+        self.assertEqual(p[0], 'A#')
+
 if __name__ == '__main__':
     unittest.main()
