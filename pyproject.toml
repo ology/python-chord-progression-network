@@ -50,7 +50,7 @@ dynamic = ["version"]
 # These URLs are displayed in a sidebar on PyPI. You don't have to have them,
 # but they can help people learn more about your project. You can include as
 # many named URLs as you want.  They can be any URL, not just to GitHub.
-Homepage = "https://github.com/ology/python-chord-progression_network"
+Homepage = "https://github.com/ology/python-chord-progression-network"
 Repository = "https://github.com/ology/python-chord-progression-network.git"
 Issues = "https://github.com/ology/python-chord-progression-network/issues"
 
