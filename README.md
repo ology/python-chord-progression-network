@@ -65,8 +65,8 @@ phrase = g.generate()
 
 s = stream.Score()
 
-for chord in phrase:
-    s.append(chord.Chord(chord, type='whole'))
+for notes in phrase:
+    s.append(chord.Chord(notes, type='whole'))
 
 s.show()
 ```
