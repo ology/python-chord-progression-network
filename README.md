@@ -3,7 +3,7 @@ Network transition chord progression generator
 
 ## DESCRIPTION
 
-This class generates network transition chord progressions. The transitions are given by a `net` of scale positions, and the chord "flavors" are defined by a `chord_map` of types. The chords that are returned are lists of three or more named notes with octaves.
+This class generates network transition chord progressions. The transitions are given by a `net` of scale positions, and the chord "flavors" are defined by a `chord_map` of types. The chords that are returned are either named chords or lists of three or more named notes with octaves.
 
 The chord types are as follows:
 ```
