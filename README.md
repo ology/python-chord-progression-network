@@ -81,7 +81,7 @@ from random_rhythms import Rhythm
 
 r = Rhythm(
     durations=[ 1/2, 1/3, 1, 3/2, 2 ],
-    groups={1/3: 3, 1/2: 2},
+    groups={ 1/3: 3, 1/2: 2 },
 )
 motifs = [ r.motif() for _ in range(4) ]
 
