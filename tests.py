@@ -97,7 +97,6 @@ class TestChordProgression(unittest.TestCase):
             # verbose=True
         )
         p = g.generate()
-        print(p)
         self.assertEqual(p[0], 'Bb')
 
 if __name__ == '__main__':
