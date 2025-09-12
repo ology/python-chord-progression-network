@@ -42,8 +42,8 @@ class Generator:
         self.flat = flat
         self.chord_phrase = chord_phrase
         self.verbose = verbose
-        self.chord_map = chord_map if chord_map is not None else self._build_chord_map()
         self.scale = scale if scale is not None else self._build_scale()
+        self.chord_map = chord_map if chord_map is not None else self._build_chord_map()
         self.graph = self._build_graph()
         self.phrase = None
         self.chords = None
@@ -61,7 +61,10 @@ class Generator:
             'aeolian':    ['m', 'dim', '', 'm', 'm', '', ''],
             'locrian':    ['dim', '', 'm', 'm', '', '', 'm'],
         }
-        return scale_maps.get(self.scale_name)
+        if self.scale_name in scale_maps:
+            return scale_maps.get(self.scale_name)
+        else:
+            return [''] * len(self.scale)
 
     def _build_scale(self):
         s = musical_scales.scale(self.scale_note, self.scale_name)

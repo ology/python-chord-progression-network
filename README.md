@@ -17,7 +17,9 @@ The chord types are as follows:
 'm9', 'm11', and 'm13' are extended minor-7th chords.
 ```
 
-The scale must be specified with either a known mode ("ionian", "dorian", etc.), "chromatic", or a custom scale. For the `ionian` mode (`major` scale), the `chord_map` is `['', 'm', 'm', '', '', 'm', 'dim']`. The `dorian` mode is `['m', 'm', '', '', 'm', 'dim', '']`, etc. A `chromatic` scale is all minors. This can be set in the constructor, or seen by printing it after `Generator` construction. A custom `scale` of named notes (with appropriate `net` and `chord_map` attributes) may be provided to the constructor if different from a traditional mode.
+The scale must be specified with one of the known scales listed on the [musical-scales](https://pypi.org/project/musical-scales/) page. A custom `scale` of named notes (with appropriate `net` and `chord_map` attributes) may also be given. Traditional modes (Ionian, Dorian, etc) have known `chord_map`s. For all other scales, a `chord_map` should be given in the constructor.
+
+For the traditional modes, the `chord_map`s are as follows: The "Ionian" mode (`major` scale) is `['', 'm', 'm', '', '', 'm', 'dim']`. "Dorian" is `['m', 'm', '', '', 'm', 'dim', '']`, etc. A "chromatic" scale is all minors.
 
 The `tonic` attribute means that if the first chord of the progression is being generated, then for `0` choose a random successor of the first chord, as defined by the `net` attribute. For `1`, return the first chord in the scale. For any other value, choose a random value of the entire scale.
 

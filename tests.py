@@ -128,6 +128,22 @@ class TestChordProgression(unittest.TestCase):
         self.assertEqual(g.scale, ['C','E','G','B'])
         p = g.generate()
         self.assertEqual(p[1], ['E4', 'G4', 'B4'])
+        g = Generator(
+            max=3,
+            scale_name='whole-tone scale',
+            net={
+                1: [2,3,4,5,6],
+                2: [1,3,4,5,6],
+                3: [1,2,4,5,6],
+                4: [1,2,3,5,6],
+                5: [1,2,3,4,6],
+                6: [1,2,3,4,5],
+            },
+            chord_map=['m'] * 6,
+        )
+        self.assertEqual(g.scale, ['C','D','E','F#','G#','A#','C'])
+        # p = g.generate()
+        # print(p)
 
 if __name__ == '__main__':
     unittest.main()
