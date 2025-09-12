@@ -59,7 +59,6 @@ class TestChordProgression(unittest.TestCase):
         self.assertTrue(p == '9' or p == '11' or p == '13')
         # always substitute
         g = Generator(
-            max=3,
             substitute=True,
             sub_cond=lambda: True
         )
@@ -105,6 +104,14 @@ class TestChordProgression(unittest.TestCase):
         )
         p = g.generate()
         self.assertEqual(p[0], 'Bb')
+
+    def test_max(self):
+        g = Generator()
+        p = g.generate()
+        self.assertEqual(len(p), 8)
+        g = Generator(max=3)
+        p = g.generate()
+        self.assertEqual(len(p), 3)
 
 if __name__ == '__main__':
     unittest.main()

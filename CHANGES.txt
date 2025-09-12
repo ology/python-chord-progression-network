@@ -1,3 +1,6 @@
+0.1.5 2025-09-11
+    - Add a max test.
+
 0.1.4 2025-09-11
     - Fix project.urls.
 
