@@ -17,6 +17,10 @@ The chord types are as follows:
 'm9', 'm11', and 'm13' are extended minor-7th chords.
 ```
 
+For the `major` scale (`ionian` mode), this `chord_map` is `['', 'm', 'm', '', '', 'm', 'dim']`. The `dorian` mode is `['m', 'm', '', '', 'm', 'dim', '']`. A `chromatic` scale is all minors. This can be set in the constructor, or seen by printing it after `Generator` construction.
+
+The `tonic` attribute means that if the first chord of the progression is being generated, then for `0` choose a random successor, as defined by the `net`. For `1`, return the first chord in the scale. For any other value, choose a random value of the entire scale.
+
 ## SYNOPSIS
 ```python
 from chord_progression_network import Generator
