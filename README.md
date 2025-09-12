@@ -22,7 +22,7 @@ The `tonic` attribute means that if the first chord of the progression is being 
 
 The `resolve` attribute means that if the last progression chord is being generated, then for `0` choose a random successor. As for the `tonic`, for `1`, return the first chord in the scale, and for any other value, choose a random value of the entire scale. In all other cases (i.e. the middle chords of the progression), choose a random successor.
 
-By default, all chord notes with accidentals are returned as sharps. If you want flats, set the `flat` attribute to `True` in the constructor.
+By default, all chords and notes with accidentals are returned as sharps. If you want flats, set the `flat` attribute to `True` in the constructor.
 
 If the `substitute` attribute is set to `True`, then the progression chords are subject to extended, "jazz" chord, including tritone substitution. For now, for this work-in-progress advanced option, please see the `substitution()` method in the source...
 
