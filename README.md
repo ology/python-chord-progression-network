@@ -55,7 +55,7 @@ g = Generator( # defaults
 phrase = g.generate()
 ```
 
-## MUSICAL EXAMPLE
+## MUSICAL EXAMPLES
 ```python
 from music21 import chord, stream
 from chord_progression_network import Generator
@@ -68,6 +68,34 @@ p = stream.Part()
 
 for notes in phrase:
     p.append(chord.Chord(notes, type='whole'))
+
+s.append(p)
+
+s.show()
+```
+
+```python
+from music21 import chord, duration, stream
+from chord_progression_network import Generator
+from random_rhythms import Rhythm
+
+r = Rhythm(
+    durations: [ 1/2, 1/3, 1, 3/2, 2 ],
+    groups={1/3: 3, 1/2: 2},
+)
+motifs = [ r.motif() for _ in range(4) ]
+print(motifs)
+
+s = stream.Score()
+p = stream.Part()
+
+for m in motifs:
+    g = Generator(max=len(m))
+    phrase = g.generate()
+    for i, d in enumerate(m):
+        c = chord.Chord(phrase[i])
+        c.duration = duration.Duration(d)
+        p.append(c)
 
 s.append(p)
 
