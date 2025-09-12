@@ -1,4 +1,4 @@
-# Python Chord Progression Network
+# Chord Progression Network
 Network transition chord progression generator
 
 ## DESCRIPTION
