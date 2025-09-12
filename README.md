@@ -54,3 +54,19 @@ g = Generator( # defaults
 )
 phrase = g.generate()
 ```
+
+## MUSICAL EXAMPLE
+```python
+from music21 import chord, stream
+from chord_progression_network import Generator
+
+g = Generator(verbose=True)
+phrase = g.generate()
+
+s = stream.Score()
+
+for chord in phrase:
+    s.append(chord.Chord(chord, type='whole'))
+
+s.show()
+```
