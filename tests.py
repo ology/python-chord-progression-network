@@ -93,10 +93,12 @@ class TestChordProgression(unittest.TestCase):
         g = Generator(
             scale_note='Bb',
             chord_phrase=True,
+            flat=True,
             # verbose=True
         )
         p = g.generate()
-        self.assertEqual(p[0], 'A#')
+        print(p)
+        self.assertEqual(p[0], 'Bb')
 
 if __name__ == '__main__':
     unittest.main()

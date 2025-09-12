@@ -145,6 +145,8 @@ class Generator:
             print('Phrase:', self.phrase)
 
         if self.chord_phrase:
+            if self.flat:
+                phrase = [self._equiv(chord, is_chord=True) for chord in phrase]
             return phrase
         else:
             chords = [self._chord_with_octave(chord) for chord in phrase]
