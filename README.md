@@ -9,7 +9,8 @@ The chord types are as follows:
 ```
 '' (i.e. an empty string) means a major chord.
 'm' signifies a minor chord.
-'7' is a seventh chord and 'M7' is a major 7th chord.
+'7' is a seventh chord
+'M7' is a major 7th chord and 'm7' is a minor 7th.
 'dim' is a diminished chord and 'aug' is augmented.
 '9', '11', and '13' are extended 7th chords.
 'M9', 'M11', and 'M13' are extended major-7th chords.
