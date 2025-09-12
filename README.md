@@ -97,6 +97,7 @@ for m in motifs:
         c = chord.Chord(phrase[i])
         c.duration = duration.Duration(d)
         p.append(c)
+
 s.append(p)
 
 s.show()
