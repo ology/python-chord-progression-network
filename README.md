@@ -24,7 +24,7 @@ The `resolve` attribute means that if the last progression chord is being genera
 
 By default, all chord notes with accidentals are returned as sharps. If you want flats, just set the `flat` attribute to `True` in the constructor.
 
-If the `substitute` attribute is set to `True`, then the progression chords are subject to extended, "jazz" chord, including tritone substitution. For now, for this advanced option, please see the `substitution()` method in the source...
+If the `substitute` attribute is set to `True`, then the progression chords are subject to extended, "jazz" chord, including tritone substitution. For now, for this work-in-progress advanced option, please see the `substitution()` method in the source...
 
 ## SYNOPSIS
 ```python
