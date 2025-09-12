@@ -10,9 +10,10 @@ class Generator:
         max=8,
         net=None,
         chord_map=None,
-        scale_name='major',
+        scale_name='ionian',
         scale_note='C',
         octave=4,
+        scale=None,
         tonic=1,
         resolve=1,
         substitute=False,
@@ -42,7 +43,7 @@ class Generator:
         self.chord_phrase = chord_phrase
         self.verbose = verbose
         self.chord_map = chord_map if chord_map is not None else self._build_chord_map()
-        self.scale = self._build_scale()
+        self.scale = scale if scale is not None else self._build_scale()
         self.graph = self._build_graph()
         self.phrase = None
         self.chords = None
@@ -63,8 +64,8 @@ class Generator:
         return scale_maps.get(self.scale_name)
 
     def _build_scale(self):
-        s = musical_scales.scale(self.scale_note)
-        # remove the octave number from the stringified Note
+        s = musical_scales.scale(self.scale_note, self.scale_name)
+        # remove the octave number from the stringified Note:
         s2 = []
         for n in s:
             s2.append(re.sub(r"\d+", "", f"{n}"))

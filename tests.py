@@ -9,7 +9,7 @@ class TestChordProgression(unittest.TestCase):
         self.assertEqual(g.max, 8)
         self.assertEqual(len(g.net), 7)
         self.assertEqual(len(g.chord_map), 7)
-        self.assertEqual(g.scale_name, 'major')
+        self.assertEqual(g.scale_name, 'ionian')
         self.assertEqual(g.scale_note, 'C')
         self.assertEqual(len(g.scale), 8)
         self.assertEqual(g.octave, 4)
@@ -33,7 +33,7 @@ class TestChordProgression(unittest.TestCase):
         self.assertEqual(p[-1], expect)
         g = Generator(
             scale_note='A',
-            scale_name='minor',
+            scale_name='aeolian',
             chord_map=['m', 'dim', '', 'm', 'm', '', ''],
             # verbose=True
         )
@@ -112,6 +112,21 @@ class TestChordProgression(unittest.TestCase):
         g = Generator(max=3)
         p = g.generate()
         self.assertEqual(len(p), 3)
+
+    def test_scale(self):
+        g = Generator(
+            scale=['C','E','G','B'],
+            net={
+                1: [2],
+                2: [3],
+                3: [4],
+                4: [1],
+            },
+            chord_map=['','m','','m']
+        )
+        self.assertEqual(g.scale, ['C','E','G','B'])
+        p = g.generate()
+        self.assertEqual(len(p), 8)
 
 if __name__ == '__main__':
     unittest.main()
