@@ -48,6 +48,7 @@ g = Generator( # defaults
     tonic=1,
     resolve=1,
     flat=False,
+    chord_phrase=False,
     substitute=False,
     verbose=False,
 )
