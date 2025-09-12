@@ -1,6 +1,22 @@
 # Python Chord Progression Network
 Network transition chord progression generator
 
+## DESCRIPTION
+
+This class generates network transition chord progressions. The transitions are given by a `net` of scale positions, and the chord "flavors" are defined by a `chord_map` of types.
+
+The chord types are as follows:
+
+```
+'' (i.e. an empty string) means a major chord.
+'m' signifies a minor chord.
+'7' is a seventh chord and 'M7' is a major 7th chord.
+'dim' is a diminished chord and 'aug' is augmented.
+'9', '11', and '13' are extended 7th chords.
+'M9', 'M11', and 'M13' are extended major-7th chords.
+'m9', 'm11', and 'm13' are extended minor-7th chords.
+```
+
 ## SYNOPSIS
 ```python
 from chord_progression_network import Generator
