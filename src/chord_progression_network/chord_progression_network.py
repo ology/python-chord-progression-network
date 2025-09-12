@@ -64,13 +64,12 @@ class Generator:
 
     def _build_scale(self):
         s = musical_scales.scale(self.scale_note)
-        # remove the octave number from the strinified Note
+        # remove the octave number from the stringified Note
         s2 = []
         for n in s:
             s2.append(re.sub(r"\d+", "", f"{n}"))
         if self.flat:
-            flattened = [ self._equiv(note) for note in s2 ]
-            s2 = flattened
+            s2 = [ self._equiv(note) for note in s2 ]
         if self.verbose:
             print('Scale:', s2)
         return s2
