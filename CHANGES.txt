@@ -1,3 +1,6 @@
+0.1.17 2025-09-13
+    - Enhance documentation.
+
 0.1.16 2025-09-12
     - Fix scale logic and documentation.
 
