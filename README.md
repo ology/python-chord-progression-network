@@ -101,6 +101,5 @@ for m in motifs:
         p.append(c)
 
 s.append(p)
-
 s.show()
 ```
