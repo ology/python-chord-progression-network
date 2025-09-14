@@ -75,7 +75,6 @@ for notes in phrase:
     p.append(chord.Chord(notes, type='whole'))
 
 s.append(p)
-
 s.show()
 ```
 
