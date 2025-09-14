@@ -100,6 +100,7 @@ g = Generator(
         6: [1,2,3,4,5],
     },
     chord_map=['m'] * 6,
+    substitute=True,
 )
 
 for m in motifs:
