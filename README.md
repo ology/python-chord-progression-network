@@ -29,6 +29,8 @@ By default, all chords and notes with accidentals are returned as sharps. If you
 
 If the `substitute` attribute is set to `True`, then the progression chords are subject to extended, "jazz" chord, including tritone substitution. For now, for this work-in-progress advanced option, please see the `substitution()` method in the source...
 
+Please see the `Tests.py` program, in this distribution for usage hints. :)
+
 ## SYNOPSIS
 ```python
 from chord_progression_network import Generator
