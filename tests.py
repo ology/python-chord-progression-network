@@ -136,11 +136,19 @@ class TestChordProgression(unittest.TestCase):
                 5: [1,2,3,4,6],
                 6: [1,2,3,4,5],
             },
+            weights={
+                1: [ 1 for _ in range(1,6) ],
+                2: [ 1 for _ in range(1,6) ],
+                3: [ 1 for _ in range(1,6) ],
+                4: [ 1 for _ in range(1,6) ],
+                5: [ 1 for _ in range(1,6) ],
+                6: [ 1 for _ in range(1,6) ],
+            },
             chord_map=['m'] * 6,
         )
         self.assertEqual(g.scale, ['C','D','E','F#','G#','A#','C'])
-        # p = g.generate()
-        # print(p)
+        p = g.generate()
+        self.assertEqual(len(p), g.max)
 
 if __name__ == '__main__':
     unittest.main()

@@ -101,6 +101,9 @@ motifs = [ r.motif() for _ in range(4) ]
 s = stream.Score()
 p = stream.Part()
 
+# simplistic example: all ones = equal probability
+weights = [ 1 for _ in range(1,7) ]
+
 g = Generator(
     scale_name='whole-tone scale',
     net={
@@ -111,6 +114,7 @@ g = Generator(
         5: [1,2,3,4,6],
         6: [1,2,3,4,5],
     },
+    weights={ i: weights for i in range(1,6) }
     chord_map=['m'] * 6,
     substitute=True,
 )

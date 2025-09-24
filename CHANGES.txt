@@ -1,3 +1,7 @@
+0.2.1 2025-09-24
+    - Fix example.
+    - Improve tests.
+
 0.2.0 2025-09-24
     - Change default net.
     - Add the weights attribute.
