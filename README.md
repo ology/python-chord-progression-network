@@ -35,19 +35,20 @@ Please see the `Tests.py` program, in this distribution for usage hints. :)
 ```python
 from chord_progression_network import Generator
 
+neighbors = [ i for i in range(1, 8) ]
 g = Generator( # defaults
     max=8,
     scale_note='C',
     scale_name='major',
     octave=4,
     net={
-        1: [1, 2, 3, 4, 5, 6],
-        2: [3, 4, 5],
-        3: [1, 2, 4, 6],
-        4: [1, 3, 5, 6],
-        5: [1, 4, 6],
-        6: [1, 2, 4, 5],
-        7: [],
+        1: neighbors,
+        2: neighbors,
+        3: neighbors,
+        4: neighbors,
+        5: neighbors,
+        6: neighbors,
+        7: neighbors,
     },
     chord_map=[ '', 'm', 'm', '', '', 'm', 'dim' ],
     tonic=1,
