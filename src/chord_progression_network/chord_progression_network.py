@@ -23,14 +23,15 @@ class Generator:
         verbose=False,
     ):
         self.max = max
+        neighbors = [ i for i in range(1, 8) ]
         self.net = net if net is not None else {
-            1: [1, 2, 3, 4, 5, 6],
-            2: [3, 4, 5],
-            3: [1, 2, 4, 6],
-            4: [1, 3, 5, 6],
-            5: [1, 4, 6],
-            6: [1, 2, 4, 5],
-            7: [],
+            1: neighbors,
+            2: neighbors,
+            3: neighbors,
+            4: neighbors,
+            5: neighbors,
+            6: neighbors,
+            7: neighbors,
         }
         self.scale_name = scale_name
         self.scale_note = scale_note

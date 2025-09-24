@@ -19,8 +19,8 @@ class TestChordProgression(unittest.TestCase):
         self.assertEqual(g.flat, False)
         self.assertEqual(g.phrase, None)
         self.assertEqual(g.chords, None)
-        self.assertEqual(len(g.graph.nodes), 6)
-        self.assertEqual(len(g.graph.edges), 24)
+        self.assertEqual(len(g.graph.nodes), 7)
+        self.assertEqual(len(g.graph.edges), 49)
 
     def test_scale_note(self):
         g = Generator(
