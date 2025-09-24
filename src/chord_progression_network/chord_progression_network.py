@@ -9,6 +9,7 @@ class Generator:
         self,
         max=8,
         net=None,
+        weights=None,
         chord_map=None,
         scale_name='ionian',
         scale_note='C',
@@ -23,16 +24,10 @@ class Generator:
         verbose=False,
     ):
         self.max = max
-        neighbors = [ i for i in range(1, 8) ]
-        self.net = net if net is not None else {
-            1: neighbors,
-            2: neighbors,
-            3: neighbors,
-            4: neighbors,
-            5: neighbors,
-            6: neighbors,
-            7: neighbors,
-        }
+        transitions = [ i for i in range(1, 8) ]
+        self.net = net if net is not None else { i: transitions for i in transitions }
+        transitions = [ 1 for _ in self.net.keys() ]
+        self.weights = weights if weights is not None else { i: transitions for i in self.net.keys() }
         self.scale_name = scale_name
         self.scale_note = scale_note
         self.octave = octave
@@ -116,8 +111,9 @@ class Generator:
     def _build_graph(self):
         g = nx.DiGraph()
         for posn, neighbors in self.net.items():
-            for neighbor in neighbors:
-                g.add_edge(posn, neighbor)
+            for i,neighbor in enumerate(neighbors):
+                w = self.weights[posn][i]
+                g.add_edge(posn, neighbor, weight=w)
         return g
 
     def generate(self):
@@ -184,7 +180,10 @@ class Generator:
 
     def _random_successor(self, v):
         successors = list(self.graph.successors(v))
-        return random.choice(successors) if successors else None
+        if not successors:
+            return None
+        weights = self.weights[v]
+        return random.choices(successors, weights=weights, k=1)[0] if successors else None
 
     def _full_keys(self):
         keys = [k for k, v in self.net.items() if len(v) > 0]

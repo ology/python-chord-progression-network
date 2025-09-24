@@ -27,7 +27,7 @@ The `resolve` attribute means that if the last progression chord is being genera
 
 By default, all chords and notes with accidentals are returned as sharps. If you want flats, set the `flat` attribute to `True` in the constructor.
 
-If the `substitute` attribute is set to `True`, then the progression chords are subject to extended, "jazz" chord, including tritone substitution. For now, for this work-in-progress advanced option, please see the `substitution()` method in the source...
+If the `substitute` attribute is set to `True`, then the progression chords are subject to extended, "jazz" chord, including tritone substitution. This module performs chord substitution depending on the `sub_cond` lambda that acts 30% of the time. For now, for this work-in-progress advanced option, please see the `substitution()` method in the source...
 
 Please see the `Tests.py` program, in this distribution for usage hints. :)
 
@@ -35,7 +35,9 @@ Please see the `Tests.py` program, in this distribution for usage hints. :)
 ```python
 from chord_progression_network import Generator
 
-neighbors = [ i for i in range(1, 8) ]
+neighbors = [ i for i in range(1, 8) ] # 1 through 7
+transitions = [ 1 for _ in range(1, 8) ] # equal probability
+
 g = Generator( # defaults
     max=8,
     scale_note='C',
@@ -49,6 +51,15 @@ g = Generator( # defaults
         5: neighbors,
         6: neighbors,
         7: neighbors,
+    },
+    weights={
+        1: transitions,
+        2: transitions,
+        3: transitions,
+        4: transitions,
+        5: transitions,
+        6: transitions,
+        7: transitions,
     },
     chord_map=[ '', 'm', 'm', '', '', 'm', 'dim' ],
     tonic=1,

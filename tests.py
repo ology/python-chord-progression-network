@@ -71,6 +71,7 @@ class TestChordProgression(unittest.TestCase):
         g = Generator(
             max=7,
             net={ 1: [2], 2: [3], 3: [4], 4: [5], 5: [6], 6: [7], 7: [1] },
+            weights={ 1: [1], 2: [1], 3: [1], 4: [1], 5: [1], 6: [1], 7: [1] },
             resolve=False
         )
         expect = [
@@ -117,12 +118,8 @@ class TestChordProgression(unittest.TestCase):
         g = Generator(
             max=3,
             scale=['C','E','G','B'],
-            net={
-                1: [2],
-                2: [3],
-                3: [4],
-                4: [1],
-            },
+            net={ 1: [2], 2: [3], 3: [4], 4: [1] },
+            weights={ 1: [1], 2: [1], 3: [1], 4: [1] },
             chord_map=['','m','','m']
         )
         self.assertEqual(g.scale, ['C','E','G','B'])
