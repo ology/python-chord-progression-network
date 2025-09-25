@@ -150,5 +150,22 @@ class TestChordProgression(unittest.TestCase):
         p = g.generate()
         self.assertEqual(len(p), g.max)
 
+    def test_weights(self):
+        g = Generator(
+            max=3,
+            weights={
+                1: [ 0,1,0,0,0,0,0 ],
+                2: [ 0,0,1,0,0,0,0 ],
+                3: [ 0,0,0,1,0,0,0 ],
+                4: [ 0,0,0,0,1,0,0 ],
+                5: [ 0,0,0,0,0,1,0 ],
+                6: [ 0,0,0,0,0,0,1 ],
+                7: [ 0,0,0,0,0,0,0 ],
+            },
+            resolve=False,
+        )
+        p = g.generate()
+        self.assertEqual(p, [['C4', 'E4', 'G4'], ['D4', 'F4', 'A4'], ['E4', 'G4', 'B4']])
+
 if __name__ == '__main__':
     unittest.main()
