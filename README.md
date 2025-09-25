@@ -36,7 +36,7 @@ Please see the `Tests.py` program, in this distribution for usage hints. :)
 from chord_progression_network import Generator
 
 neighbors = [ i for i in range(1, 8) ] # 1 through 7
-transitions = [ 1 for _ in range(1, 8) ] # equal probability
+transitions = [ 1 for _ in neighbors ] # equal probability
 
 g = Generator( # defaults
     max=8,
