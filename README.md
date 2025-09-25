@@ -114,14 +114,7 @@ g = Generator(
         5: [1,2,3,4,6],
         6: [1,2,3,4,5],
     },
-    weights={
-        1: weights,
-        2: weights,
-        3: weights,
-        4: weights,
-        5: weights,
-        6: weights,
-    },
+    weights={ i: weights for i in range(1,7) },
     chord_map=['m'] * 6,
     substitute=True,
 )
