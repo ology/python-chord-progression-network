@@ -1,29 +1,18 @@
-from music21 import duration, chord, note, scale, stream
+from music21 import pitch
+import mido
+import time
 from chord_progression_network import Generator
-from music_tonnetztransform import Transform
-from music_voicegen import MusicVoiceGen
-from random_rhythms import Rhythm
-import random
+from music_melodicdevice import Device
 
-s = stream.Stream()
-chord_part = stream.Part()
-melody_part = stream.Part()
-bass_part = stream.Part()
+# print("Available MIDI output ports:")
+# for port in mido.get_output_names():
+#     print(port)
+# output_port_name = mido.get_output_names()[0]
+output_port_name = 'USB MIDI Interface'
 
-bass_notes = [] # first note of each chord progression measure
-
-r = Rhythm(durations=[1, 2, 3])
-chord_motifs = [ r.motif() for _ in range(3) ]
-
-r = Rhythm(
-    durations=[1/2, 1/3, 1, 3/2],
-    weights=[2, 1, 3, 2],
-    groups={1/3: 3},
-    smallest=1/4,
-)
-melody_motifs = [ r.motif() for _ in range(3) ]
-
+weights = [ 1 for _ in range(1,6) ] # equal probability
 g = Generator(
+    max=4 * 6, # beats x measures
     scale_name='whole-tone scale',
     net={
         1: [2,3,4,5,6],
@@ -33,85 +22,29 @@ g = Generator(
         5: [1,2,3,4,6],
         6: [1,2,3,4,5],
     },
-    chord_map=['m'] * 6, # every chord is the same flavor
-    substitute=False,
-    tonic=False,
+    weights={ i: weights for i in range(1,7) },
+    chord_map=['7'] * 6, # set every chord to the same flavor (like '', 'm', '7')
     resolve=False,
+    substitute=True,
     verbose=False,
 )
+phrase = g.generate()
 
-# chords
-for _ in range(2):
-    # section A1
-    for i,motif in enumerate(chord_motifs):
-        g.max = len(motif)
-        g.tonic = i == 0
-        g.resolve = i == len(motif) - 1
-        phrase = g.generate()
-        bass_notes.append(phrase[0][0])
-        for j,dura in enumerate(motif):
-            c = chord.Chord(phrase[j])
-            c.duration = duration.Duration(dura)
-            chord_part.append(c)
-    # section B1
-    t = Transform(
-        format='ISO',
-        base_chord=phrase[-1],
-        max=len(chord_motifs[0]),
-        verbose=False,
-    )
-    generated = t.circular()[0]
-    bass_notes.append('rest')
-    for i,dura in enumerate(chord_motifs[0]):
-        c = chord.Chord(generated[i])
-        c.duration = duration.Duration(dura)
-        chord_part.append(c)
-    # section A2
-    for motif in chord_motifs + [chord_motifs[0]]:
-        g.max = len(motif)
-        phrase = g.generate()
-        bass_notes.append(phrase[0][0])
-        for j,dura in enumerate(motif):
-            c = chord.Chord(phrase[j])
-            c.duration = duration.Duration(dura)
-            chord_part.append(c)
+device = Device(verbose=False)
 
-# "melody"
-v = MusicVoiceGen(
-    pitches=[ p.midi + 12 for p in scale.WholeToneScale('C').getPitches() ],
-    intervals=[-3,-2,-1,1,2,3]
-)
-for _ in range(2):
-    for motif in melody_motifs:
-        for dura in motif:
-            if random.random() < 0.2:
-                n = note.Rest()
-            else:
-                n = note.Note(v.rand())
-            n.duration = duration.Duration(dura)
-            melody_part.append(n)
-    n = note.Rest(type='whole')
-    melody_part.append(n)
-    for motif in melody_motifs + [melody_motifs[0]]:
-        for dura in motif:
-            if random.random() < 0.1:
-                n = note.Rest()
-            else:
-                n = note.Note(v.rand())
-            n.duration = duration.Duration(dura)
-            melody_part.append(n)
+bpm = 100
 
-# bass
-for n in bass_notes:
-    if n == 'rest':
-        n = note.Rest(type='whole')
-    else:
-        n = note.Note(n, type='whole')
-    bass_part.append(n)
-
-# finalize
-s.insert(0, chord_part)
-s.insert(0, melody_part)
-s.insert(0, bass_part.transpose(-12 * 2))
-
-s.show() # 'midi' to open in a music app
+with mido.open_output(output_port_name) as outport:
+    outport.send(mido.Message('start'))
+    velocity = 100
+    channel = 0
+    for i, ph in enumerate(phrase):
+        arped = device.arp(ph, duration=1, arp_type='updown', repeats=1)
+        for a in arped:
+            print(a)
+            p = pitch.Pitch(a[1]).midi
+            msg_on = mido.Message('note_on', note=p, velocity=velocity, channel=channel)
+            outport.send(msg_on)
+            time.sleep(a[0])
+            msg_off = mido.Message('note_off', note=p, velocity=0, channel=channel)
+            outport.send(msg_off)
