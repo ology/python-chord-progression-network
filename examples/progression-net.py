@@ -8,20 +8,7 @@ motifs = [ r.motif() for _ in range(4) ]
 s = stream.Score()
 p = stream.Part()
 
-g = Generator(
-    scale_name='whole-tone scale',
-    net={
-        1: [2,3,4,5,6],
-        2: [1,3,4,5,6],
-        3: [1,2,4,5,6],
-        4: [1,2,3,5,6],
-        5: [1,2,3,4,6],
-        6: [1,2,3,4,5],
-    },
-    chord_map=['m'] * 6,
-    substitute=True,
-    verbose=True,
-)
+g = Generator()
 
 for m in motifs:
     g.max = len(m)
