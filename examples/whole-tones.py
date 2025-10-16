@@ -1,8 +1,13 @@
 from music21 import pitch
 import mido
 import time
-from chord_progression_network import Generator
 from music_melodicdevice import Device
+try:
+    import sys
+    sys.path.append('./src')
+    from chord_progression_network.chord_progression_network import Generator
+except ImportError:
+    from chord_progression_network import Generator
 
 # print("Available MIDI output ports:")
 # for port in mido.get_output_names():

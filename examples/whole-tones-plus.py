@@ -1,9 +1,14 @@
 from music21 import duration, chord, note, scale, stream
-from chord_progression_network import Generator
 from music_tonnetztransform import Transform
 from music_voicegen import MusicVoiceGen
 from random_rhythms import Rhythm
 import random
+try:
+    import sys
+    sys.path.append('./src')
+    from chord_progression_network.chord_progression_network import Generator
+except ImportError:
+    from chord_progression_network import Generator
 
 s = stream.Stream()
 chord_part = stream.Part()
