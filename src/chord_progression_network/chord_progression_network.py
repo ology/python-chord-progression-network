@@ -241,11 +241,10 @@ class Generator:
                 'A': 'm',
                 'B': 'dim',
             }
-        chord_map = list(scale_map.values())
+        self.chord_map = list(scale_map.values())
         size = len(scale_map) + 1
         transition = [ i for i in range(1, size) ] # to all nodes
-        net = { i: transition for i in range(1, size) } # each node neighbor is all nodes
+        self.net = { i: transition for i in range(1, size) } # each node neighbor is all nodes
         weight = [ 1 for _ in range(1, size) ] # equal probability
-        weights = { i: weight for i in range(1, size) } # 
+        self.weights = { i: weight for i in range(1, size) } # 
         self.graph = self._build_graph()
-        return chord_map, net, weights
