@@ -1,3 +1,6 @@
+0.2.6 2025-12-18
+    - Fix distro...
+    
 0.2.5 2025-12-18
     - Add the `map_net_weights()` method.
 
