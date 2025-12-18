@@ -241,6 +241,7 @@ class Generator:
                 'A': 'm',
                 'B': 'dim',
             }
+        self.scale = list(scale_map.keys())
         self.chord_map = list(scale_map.values())
         size = len(scale_map) + 1
         transition = [ i for i in range(1, size) ] # to all nodes
