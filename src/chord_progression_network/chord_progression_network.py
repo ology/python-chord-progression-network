@@ -247,4 +247,5 @@ class Generator:
         net = { i: transition for i in range(1, size) } # each node neighbor is all nodes
         weight = [ 1 for _ in range(1, size) ] # equal probability
         weights = { i: weight for i in range(1, size) } # 
+        self._build_graph()
         return chord_map, net, weights
