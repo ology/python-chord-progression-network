@@ -167,5 +167,12 @@ class TestChordProgression(unittest.TestCase):
         p = g.generate()
         self.assertEqual(p, [['C4', 'E4', 'G4'], ['D4', 'F4', 'A4'], ['E4', 'G4', 'B4']])
 
+    def test_map_net_weights(self):
+        g = Generator()
+        g.chord_map, g.net, g.weights = g.map_net_weights()
+        self.assertIsInstance(g.chord_map, list)
+        self.assertIsInstance(g.net, dict)
+        self.assertIsInstance(g.weights, dict)
+
 if __name__ == '__main__':
     unittest.main()

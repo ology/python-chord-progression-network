@@ -229,3 +229,22 @@ class Generator:
         if self.verbose and substitute != chord:
             print(f'Substitute: "{chord}" => "{substitute}"')
         return substitute
+
+    def map_net_weights(self, scale_map=None):
+        if not scale_map:
+            scale_map = {
+                'C': '',
+                'D': 'm',
+                'E': 'm',
+                'F': '',
+                'G': '',
+                'A': 'm',
+                'B': 'dim',
+            }
+        chord_map = list(scale_map.values())
+        size = len(scale_map) + 1
+        transition = [ i for i in range(1, size) ] # to all nodes
+        net = { i: transition for i in range(1, size) } # each node neighbor is all nodes
+        weight = [ 1 for _ in range(1, size) ] # equal probability
+        weights = { i: weight for i in range(1, size) } # 
+        return chord_map, net, weights

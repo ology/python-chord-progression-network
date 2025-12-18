@@ -70,6 +70,12 @@ g = Generator( # defaults
     verbose=False,
 )
 phrase = g.generate()
+
+# Use a different set of chords with equal transition probability:
+g = Generator()
+scale_map = { 'G': 'm', 'Bb': '', 'D': 'm' }
+g.chord_map, g.net, g.weights = g.map_net_weights(scale_map=scale_map)
+phrase = g.generate()
 ```
 
 ## MUSICAL EXAMPLES
